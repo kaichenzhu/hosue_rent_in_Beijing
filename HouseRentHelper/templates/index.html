@@ -1,0 +1,112 @@
+{% load static %}
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+       <title>rent house in Beijing</title>
+       <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+       <link rel="stylesheet" href="http://cache.amap.com/lbs/static/jquery.range.css" />
+       <script src="http://cache.amap.com/lbs/static/jquery-1.9.1.js"></script>
+       <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+       <script src="http://webapi.amap.com/maps?v=1.3&key=22d3816e107f199992666d6412fa0691&plugin=AMap.ArrivalRange,AMap.Scale,AMap.Geocoder,AMap.Transfer,AMap.Autocomplete,AMap.Scale,AMap.OverView,AMap.ToolBar"></script>
+       <script src="http://cache.amap.com/lbs/static/jquery.range.js"></script>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+       <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+       <link rel="stylesheet" href="{% static "style.css" %}">
+    </head>
+    <body>
+       <nav class="navbar navbar-toggleable-md">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#">Navbar</a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+             <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                   <button name="" class="street_name dropdown-toggle" href="#" id="region" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   全北京
+                   </button>
+                   <ul class="dropdown-menu" aria-labelledby="region" id = "regions"></ul>
+                </li>
+                <li class="nav-item dropdown">
+                   <button class="price_name dropdown-toggle" href="#" id="price" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Price
+                   </button>
+                   <ul class="price dropdown-menu" aria-labelledby="price">
+                      <li><a name = "Unlimited" class="dropdown-item" href="#">Unlimited</a></li>
+                      <li><a name = "600_1000" class="dropdown-item" href="#">600 to 1000 RMB</a></li>
+                      <li><a name = "1000_1500" class="dropdown-item" href="#">1000 to 1500 RMB</a></li>
+                      <li><a name = "1500_2000" class="dropdown-item" href="#">1500 to 2000 RMB</a></li>
+                      <li><a name = "2000_3000" class="dropdown-item" href="#">2000 to 3000 RMB</a></li>
+                      <li><a name = "3000_5000" class="dropdown-item" href="#">3000 to 5000 RMB</a></li>
+                      <li><a name = "5000_8000" class="dropdown-item" href="#">5000 to 8000 RMB</a></li>
+                      <li><a name = "8000_30000" class="dropdown-item" href="#">8000 to unlimited</a></li>
+                      <hr>
+                      <input id = "min_price" placeholder="minimun" class="form-control" type="text">
+                      <input id = "max_price" placeholder="maximum" class="form-control" type="text">
+                     <button id = "price_confirm" type="button" class="btn btn-outline-info">Confirm</button>
+                   </ul>
+                </li>
+                <li class="nav-item dropdown">
+                   <button class="room_name dropdown-toggle" href="#" id="room" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   house/room
+                   </button>
+                   <ul class="room dropdown-menu" aria-labelledby="room">
+                      <li><a name = "Single Room" class="dropdown-item" href="#">Single Room</a></li>
+                      <li class="dropdown-submenu">
+                         <a name = "house" class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Entire house</a>
+                         <ul class="dropdown-menu">
+                            <a name = "house" class="dropdown-item" href="#">Unlimited</a>
+                            <a name = "house with 1 room" class="dropdown-item" href="#">1 bedroom</a>
+                            <a name = "house with 2 rooms" class="dropdown-item" href="#">2 bedrooms</a>
+                            <a name = "house with 3 rooms" class="dropdown-item" href="#">3 bedrooms</a>
+                            <a name = "house with 4 rooms" class="dropdown-item" href="#">4 bedrooms</a>
+                         </ul>
+                      </li>
+                   </ul>
+                </li>
+                <li class="nav-item">
+                   <button onClick="loadRentLocation()">search</button>
+                </li>
+             </ul>
+          </div>
+       </nav>
+       <div id="container"></div>
+       <div class="button-group">
+          <input id="en" type="button" class="button" value="English" />
+          <input id="zh_en" type="button" class="button" value="English and Chinese/ 中英" />
+          <input id="zh_cn" type="button" class="button" value="中文" />
+       </div>
+       <div class="card">
+          <div class="card-block">
+             <div class="custom-controls-stacked">
+                <label class="custom-control custom-radio">
+                <input id="radioStacked1" name="vehicle" type="radio" class="custom-control-input" value="SUBWAY,BUS"
+                onClick="takeBus(this)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">SUBWAY + BUS</span>
+                </label>
+                <label class="custom-control custom-radio">
+                <input id="radioStacked2" name="vehicle" type="radio" class="custom-control-input" value="SUBWAY"
+                onClick="takeSubway(this)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">SUBWAY</span>
+                </label>
+             </div>
+             <br>
+             <input id="work-location" placeholder="Your working place" class="form-control mr-sm-2" type="text">
+          </div>
+       </div>
+       <div class='button-group toolbar'>
+          <input type="checkbox" onclick="toggleScale(this)" />scale
+          <input type="checkbox" id="toolbar" onclick="toggleToolBar(this)" />toolbar
+          <input type="checkbox" id="overview" onclick="toggleOverViewShow(this)" />overview
+       </div>
+       <div id="transfer-panel"></div>
+       <script src="{% static "map.js" %}"></script>
+    </body>
+ </html>

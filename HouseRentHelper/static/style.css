@@ -1,0 +1,74 @@
+.navbar {
+    z-index: 1;
+    }
+    .nav-item {
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+    .nav-item > button{
+    background-color: #0d9bf2;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    }
+    .dropdown-submenu {
+    position: relative;
+    }
+    .dropdown-submenu a::after {
+    transform: rotate(-90deg);
+    position: absolute;
+    right: 3px;
+    top: 40%;
+    }
+    .dropdown-submenu:hover .dropdown-menu,
+    .dropdown-submenu:focus .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute !important;
+    margin-top: -30px;
+    left: 100%;
+    }
+    .dropdown-menu > input {
+       width: 80%;
+       margin-left: 10%;
+    }
+    .dropdown-menu > button {
+       width: 80%;
+       margin-left: 10%;
+    }
+    @media (max-width: 992px) {
+    .dropdown-menu {
+    width: 50%;
+    }
+    .dropdown-menu .dropdown-submenu {
+    width: auto;
+    }
+    }
+    .card {
+    color: #fff;
+    background-color: #0d9bf2;
+    border-color: #0d9bf2;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    width: 260px;
+    z-index: 2;
+    }
+    #transfer-panel {
+    position: absolute;
+    background-color: white;
+    max-height: 80%;
+    overflow-y: auto;
+    top: 30px;
+    left: 20px;
+    width: 250px;
+    }
+    .toolbar {
+    background-color: #0d9bf2;
+    right: 30px;
+    bottom: 70px;
+    border-radius: 3px;
+    color: #fff;
+    }
