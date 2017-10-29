@@ -82,7 +82,7 @@ Import regions information to your MySQL server from houserent_regions.sql(in ro
 
 #### Web crawler
 In the above step, we have created a Region table in the databse which include 21 main regions in Beijing.
-In the next step, we could fetch all streets in Beijing using a web crawler.
+In the next step, we could fetch all streets based on these regions using a web crawler.
 I create a customized django-admin command in this project(you can find it in the 'hosue_rent_in_Beijing/HouseCrawler/management/commands/fetchstreet.py')
 Start crawling the streets of Beijing by typing the following command:
 ```
